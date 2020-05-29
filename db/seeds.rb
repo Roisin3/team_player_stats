@@ -1,4 +1,4 @@
-Team.new(name: 'Eauccaneers')
+Team.new(name: 'Buccaneers')
 Team.new(name: 'Eager Boomerangs')
 Team.new(name: 'Powerful Warthogs')
 
