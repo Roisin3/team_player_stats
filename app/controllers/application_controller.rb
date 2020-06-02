@@ -13,26 +13,31 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get "/signup" do
-    erb :signup
-  end
-
-  post '/signup' do
-    @user = User.new(name: params["name"], username: params["username"], password_digest: params["password"])
-    @user.save
-    #session[:user_id] = @user.id
-
-    erb :'/team/index'
-  end
 
   post '/' do
     @user = User.find_by(username: params[:username], password_digest: params[:password])
-    if @user
-      session[:user_id] = @user.id
-      erb :test
+    if @user = true
+#      session[:user_id] = @user.id
+      redirect to '/team/index'
     else
-      redirect '/'
+      redirect to '/'
     end
   end
+
+  get '/team/index' do
+    erb :"/team/index"
+  end
+
+  helpers do
+
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||=User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+  end
+
 
 end
