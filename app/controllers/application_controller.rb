@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
 
   post '/' do
-    @user = User.find_by(username: params[:username], password_digest: params[:password])
+    @user = User.find_by(team_name: params[:team_name], password_digest: params[:password])
     if @user = true
 #      session[:user_id] = @user.id
       redirect to '/team/index'

@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
+  validates_presence_of :email, :team_name, :password_digest
   has_many :player
-  belongs_to :user
 
 end
