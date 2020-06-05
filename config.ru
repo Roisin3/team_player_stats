@@ -1,6 +1,5 @@
 require './config/environment'
 require_relative 'app/controllers/teams_controller'
-require_relative 'app/controllers/users_controller'
 require_relative 'app/controllers/players_controller'
 
 if ActiveRecord::Migrator.needs_migration?
