@@ -1,7 +1,8 @@
-Team.new(name: 'Buccaneers')
-Team.new(name: 'Eager Boomerangs')
-Team.new(name: 'Powerful Warthogs')
+Team.new(team_name: 'Buccaneers', email: "test1@test.com", password_digest: 'test1')
+Team.new(team_name: 'Eager Boomerangs', email: 'test2@test.com', password_digest: 'test2')
+Team.new(team_name: 'Powerful Warthogs', email: 'test3@test.com', password_digest: 'test3')
 
+=begin
 Player.new(name: 'Eri', posittion: 'Goalkeeper', games: 2, goals: 0, saves: 4, assists: 0, blocks: 2, shots: 1 0, interceptions: 1 1, passes: 35 10, red_cards: 0 0, yellow_cards: 01)
 Player.new(name: 'Alryd', posittion: 'Center-Left', games: 2, goals: 0, saves: 0, assists: 0, blocks: , shots: 1 , interceptions: 1 , passes: 35 , red_cards: 0 0, yellow_cards: 00)
 Player.new(name: 'Karveth', posittion: 'Center-Right', games: 2, goals: 0, saves: 0, assists: 0, blocks: , shots: 1 , interceptions: 1 , passes: 35 , red_cards: 0 0, yellow_cards: 00)
@@ -37,3 +38,4 @@ Player.new(name: 'Miryr', posittion: 'Left-Midfielder', games: 2, goals: 0, save
 Player.new(name: 'Tuzzok', posittion: 'Center-Midfielder', games: 2, goals: 0, saves: 0, assists: 0, blocks: , shots: 1 , interceptions: 1 , passes: 35 , red_cards: 0 , yellow_cards: 0)
 Player.new(name: 'Thruhyrrg', posittion: 'Forward', games: 2, goals: 0, saves: 0, assists:1 , blocks: , shots: 1 , interceptions: 1 , passes: 35 , red_cards: 0 , yellow_cards: 0)
 Player.new(name: 'Dyn', posittion: 'Attacking-Midfielder', games: 2, goals: 1, saves: 0, assists: 0, blocks: , shots: 1 , interceptions: 1 , passes: 35 , red_cards: 0 , yellow_cards: 0)
+=end

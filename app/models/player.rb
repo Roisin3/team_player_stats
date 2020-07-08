@@ -1,4 +1,8 @@
 class Player < ActiveRecord::Base
-  belongs_to :team, through: :players_team
+  belongs_to :team
 
+  extend Slugifiable::ClassMethods
+  include Slugifiable::InstanceMethods
+
+  
 end

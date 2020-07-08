@@ -1,7 +1,0 @@
-<h2>Edit Team</h2>
-
-<form method='post' action="/team/<%= @team.id %>">
-  <input id='hidden' type="hidden" name="_method" value="patch">
-  <input type='text' name='team_name' value="<%= @team.name %>">
-  <input type='submit' value="Submit">
-</form>
