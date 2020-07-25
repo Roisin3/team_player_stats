@@ -4,7 +4,7 @@
         <input type='submit'value='Delete Player'>
     </form>
 
-    <table>
+    <table style="width:100%" border="1px, solid black">
         <tr>
             <th>Name</th>
             <th>Position</th>
@@ -35,4 +35,5 @@
     </table>
 
     <a href="/players/<%= @player.id %>/edit">Edit Player</a>
+    <a href="/players/new">Add Player</a>
     <a href="/players">Back to Team</a>
