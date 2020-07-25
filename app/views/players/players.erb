@@ -1,0 +1,44 @@
+<!DOCTYPE html >
+<h1> <%= current_user.team_name %> Roster </h1>
+    <table style="width:100%" border="1px, solid black">
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Games Played</th>
+            <th>Goals</th>
+            <th>Saves</th>
+            <th>Assists</th>
+            <th>Blocks</th>
+            <th>Shots</th>
+            <th>Interceptions</th>
+            <th>Passes</th>
+            <th>Red Cards</th>
+            <th>Yellow Cards</th>
+        </tr>
+
+        <% @players.each do |stat| %>
+            <% if stat.team_id == current_user.id %>
+                <tr>
+                <th><a href="/players/<%= stat.id %>/edit"><%= stat.name %></a></th>
+                <th><%= stat.position %></th>
+                <th><%= stat.games %></th>
+                <th><%= stat.goals %></th>
+                <th><%= stat.saves %></th>
+                <th><%= stat.assists %></th>
+                <th><%= stat.blocks %></th>
+                <th><%= stat.shots %></th>
+                <th><%= stat.interceptions %></th>
+                <th><%= stat.passes %></th>
+                <th><%= stat.red_cards %></th>
+                <th><%= stat.yellow_cards %></th>
+                </tr>
+            <% end %>
+        <% end %>
+
+
+
+    </table>
+
+
+    <a href="/players/new">Add Player</a>
+    <a href='/logout'>Logout</a>

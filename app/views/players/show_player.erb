@@ -1,0 +1,38 @@
+
+    <form method='post' action="/players/<% @player.id %>/delete">
+        <input id='hidden' type='hidden' name='_method' value='Delete'>
+        <input type='submit'value='Delete Player'>
+    </form>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Games Played</th>
+            <th>Goals</th>
+            <th>Saves</th>
+            <th>Assists</th>
+            <th>Blocks</th>
+            <th>Shots</th>
+            <th>Interceptions</th>
+            <th>Passes</th>
+            <th>Red Cards</th>
+            <th>Yellow Cards</th>
+        </tr>
+            <th><%= @player.name %></th>
+            <th><%= @player.position %></th>
+            <th><%= @player.games %></th>
+            <th><%= @player.goals %></th>
+            <th><%= @player.saves %></th>
+            <th><%= @player.assists %></th>
+            <th><%= @player.blocks %></th>
+            <th><%= @player.shots %></th>
+            <th><%= @player.interceptions %></th>
+            <th><%= @player.passes %></th>
+            <th><%= @player.red_cards %></th>
+            <th><%= @player.yellow_cards %></th>
+        </tr>
+    </table>
+
+    <a href="/players/<%= @player.id %>/edit">Edit Player</a>
+    <a href="/players">Back to Team</a>

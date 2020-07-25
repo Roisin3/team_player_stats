@@ -1,8 +1,14 @@
 class Team < ActiveRecord::Base
-  has_many :players
   has_secure_password
+  has_many :player
 
-  extend Slugifiable::ClassMethods
-  include Slugifiable::InstanceMethods
+  def slug
+      team_name.downcase.gsub('', '-')
+  end
+
+  def self.find_by_slug(slug)
+      Team.all.find{|team| team.slug == slug}
+  end
 
 end
+

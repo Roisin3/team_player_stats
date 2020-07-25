@@ -1,0 +1,32 @@
+<p> <%= current_user.team_name %> Roster </p>
+<table>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Games Played</th>
+            <th>Goals</th>
+            <th>Saves</th>
+            <th>Assists</th>
+            <th>Blocks</th>
+            <th>Shots</th>
+            <th>Interceptions</th>
+            <th>Passes</th>
+            <th>Red Cards</th>
+            <th>Yellow Cards</th>
+        </tr>
+        <% @player.each do |stat| %>
+            <th><%= stat.name %></th>
+            <th><%= stat.position %></th>
+            <th><%= stat.games %></th>
+            <th><%= stat.goals %></th>
+            <th><%= stat.saves %></th>
+            <th><%= stat.assists %></th>
+            <th><%= stat.blocks %></th>
+            <th><%= stat.shots %></th>
+            <th><%= stat.interceptions %></th>
+            <th><%= stat.passes %></th>
+            <th><%= stat.red_cards %></th>
+            <th><%= stat.yellow_cards %></th>
+        <% end %>
+        </tr>
+    </table>

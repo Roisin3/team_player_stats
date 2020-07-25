@@ -1,0 +1,21 @@
+<%= if Helpers.is_logged_in?(session) %>
+<%= @error %>
+    <form action='/action' method='post'>
+        Create New Player:
+        <p>Name: <input type='text' name='name'></p>
+        <p>Position: <input type='text' name='position'></p>
+        <p>Games: <input type='number' min='0' max='10' name='games'></p>
+        <p>Goals: <input type='number' name='goals'></p>
+        <p>Saves: <input type='number' name='saves'></p>
+        <p>Assists: <input type='number' name='assists'></p>
+        <p>Blocks: <input type='number' name='blocks'></p>
+        <p>Shots: <input type='number' name='shots'></p>
+        <p>Interceptions: <input type='number' name='interceptions'></p>
+        <p>Passes: <input type='number' name='passes'></p>
+        <p>Red Cards: <input type='number' name='red_cards'></p>
+        <p>Yellow Cards: <input type='number' name='yellow_cards'></p>
+        <input type='submit' value='Submit'>
+    </form>
+<% else %>
+    <h1> You must be logged in to make players</h1>
+<% end %>

@@ -1,9 +1,11 @@
+require_relative './config/environment'
+
 require './config/environment'
-require_relative 'app/controllers/teams_controller'
-require_relative 'app/controllers/players_controller'
 
-if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
-end
 
+use Rack::MethodOverride
+#use Rack::Session::Cookie
+
+use TeamsController
+use PlayersController
 run ApplicationController

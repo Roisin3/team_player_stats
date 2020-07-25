@@ -1,55 +1,55 @@
-require './config/environment'
-
 class TeamsController < ApplicationController
-  #use Rack::Flash
-
-  get 'team/new' do
-    if logged_in?
-      redirect "/players"
-    else
-      erb :'team/new'
+    get '/team/:slug' do
+        @team = Team.find_by_slug(params[:slug])
+        erb :'team/show'
     end
-  end
 
-  get '/team/login' do
-    if logged_in?
-      redirect '/players'
-    else
-      session.clear
-      erb :'team/login'
+    get '/signup' do
+        if !logged_in?
+            erb :'teams/create_team'
+        else
+            redirect to '/players'
+        end
     end
-  end
 
-  post '/team' do
-    if !Team.find_by(team_name: params[:team_name])
-    @team = Team.create[params]
-    session[:team_id] = @team.id
-      redirect '/players'
-    else
-      flash[:message] = "A team with that name already exists."
-      redirect '/'
+    post '/signup' do
+        if params[:team_name] == '' || params[:email] == '' || params[:password] == ''
+            redirect to '/signup'
+        else
+            @team = Team.new(:team_name => params[:team_name], :email => params[:email], :password => params[:password])
+            @team.save
+            session[:team_id] == @team.id
+            redirect to '/players'
+        end
     end
-  end
 
-  post '/team/login' do
-    @team = Team.find_by(team_name: params[:team_name])
-    if @user && @user.authenticate(params[:password])
-      session[:team_id] = @team.id
-      redirect '/players'
-    else
-      flash[:message] = "The team name or password did not match."
-      redirect '/'
+    get '/login' do
+        if !logged_in?
+            erb :'teams/login'
+        else
+            redirect to '/players'
+        end
     end
-  end
 
-  post '/logout' do
-    if logged_in?
-      session.clear
-      redirect to '/'
-    else
-      redirect '/'
+    post '/login' do
+        team = Team.find_by(:team_name => params[:team_name])
+        if team && team.authenticate(params[:password])
+            session[:team_id] = team.id
+            redirect to "/players"
+        else
+            redirect to '/signup'
+        end
     end
-  end
-  
+
+    get '/logout' do
+        if logged_in?
+            session.destroy
+            redirect to '/login'
+        else
+            redirect to '/'
+        end
+    end
 
 end
+
+

@@ -1,18 +1,17 @@
 <html>
-<head>
-  <title>Player Tracker</title>
-</head>
+<h1>Player Tracker</h1>
 
-  <body>
-    <h1 style='text-align-center'>Player Tracker</h1>
+  <nav>
+  <% if logged_in? %>
+    <p>Welcome, <%= current_user.team_name %></p>
+    <a href='/players'>Roster</a>
+    <a href='/logout'>Log Out</a>
 
-    <h3>Please login to your team or singup:</h3>
-    <form method='post' action=''>
-      <input type='text' name='team_name' placeholder='Team Name'><br>
-      <input type='password' name='password' placeholder='Password'>
-      <input type='submit' value='Submit'>
-    </form>
-    <a href="/signup">Sign up</a>
-  </body>
+  <% else %>
+    <a href='/signup'>Sign Up</a>
+    <a href='/login'>Log In</a>
+  <% end %>
+
+  </nav>
 
 </html>

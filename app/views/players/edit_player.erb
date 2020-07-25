@@ -1,0 +1,24 @@
+<h2>Edit Player</h2>
+
+<form method='post' action="/players/<%= @player.id %>">
+ <input id='hidden' type='hidden' name='_method' value='patch'>
+ <p>Name: <input type='text' name='name' value="<%= @player.name %>"></p>
+ <p>Position: <input type='text' name='position' value="<%= @player.position %>"></p>
+ <p>Games: <input type='number' min='0' max='10' name='games' value="<%= @player.games %>"></p>
+ <p>Goals: <input type='number' name='goals' value="<%= @player.goals %>"></p>
+ <p>Saves: <input type='number' name='saves' value="<%= @player.saves %>"></p>
+ <p>Assists: <input type='number' name='assists' value="<%= @player.assists %>"></p>
+ <p>Blocks: <input type='number' name='blocks' value="<%= @player.blocks %>"></p>
+ <p>Shots: <input type='number' name='shots' value="<%= @player.shots %>"></p>
+ <p>Interceptions: <input type='number' name='interceptions' value="<%= @player.interceptions %>"></p>
+ <p>Passes: <input type='number' name='passes' value="<%= @player.passes %>"></p>
+ <p>Red Cards: <input type='number' name='red_cards' value="<%= @player.red_cards %>"></p>
+ <p>Yellow Cards: <input type='number' name='yellow_cards' value="<%= @player.yellow_cards %>"></p>
+ <input type='submit' value='Submit'>
+</form>
+
+ <form method='post' action="/players/<%= @player.id %>/delete">
+    <input id='hidden' type='hidden' name='_method' value='DELETE'>
+    <input type='submit' value='Delete Player'>
+</form>
+ 

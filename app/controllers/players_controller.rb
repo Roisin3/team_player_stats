@@ -1,67 +1,94 @@
-class PlayerController < ApplicationController
-    get '/players' do
-        redirect_if_not_logged_in
-        @team = Team.find_by('id' => current_user.id)
-        @player = @team.player.ApplicationController
+class PlayersController < ApplicationController
 
-        erb :
+    get '/players' do
+        if logged_in?
+            @players = Player.all
+            erb :'players/players'
+        else
+            redirect to '/login'
+        end
     end
 
     get '/players/new' do
-        redirect_if_not_logged_in
-
-        @team = Team.find_by('id' => current_user.id)
-
-        erb :
+        if logged_in?
+            erb :'players/create_player'
+        else
+            redirect to '/login'
+        end
     end
 
     post '/players' do
-        redirect_if_not_logged_in
-        @team = Team.find_by('id' => session[:team_id])
-
-        if params[:name] != ''
-            @player = Player.create(params)
-            redirect '/players'
+        if logged_in?
+            if params[:name] == "" || params[:position] == ""
+                redirect to "/players/new"
+            else
+                @player = current_user.player.build(name: params[:name], position: params[:position], games: params[:games], goals: params[:goals], saves: params[:saves], assists: params[:assists], blocks: params[:blocks], shots: params[:shots], interceptions: params[:interceptions], passes: params[:passes], red_cards: params[:red_cards], yellow_cards: params[:yellow_cards])
+                if @player.save
+                    redirect to "/players/#{@player.id}"
+                else
+                    redirect to "/players/new"
+                end
+            end
         else
-            flash[:message] = 'Please enter valid player name'
+            redirect to '/login'
         end
     end
 
-    patch '/player/:id' do
-        @player = Player.find_by_id(params[:id])
-         if @player && @player.user == current_user
-            @player.name = params[:name]
-            @player.position = params[:position]
-            @player.games = params[:games]
-            @player.goals = params[:goals]
-            @player.saves = params[:saves]
-            @player.assists = params[:assists]
-            @player.blocks = params[:blocks]
-            @player.shots = params[:interceptions]
-            @player.passes = params[:passes]
-            @player.red_cards = params[:red_cards]
-            @player.yellow_cards = params[:yellow_cards]
-            @player.team_id = current_user.id
-            @player.save
-         else
-            flash[:message] = 'You do not have access to that player'
-                redirect '/players'
+    get '/players/:id' do
+        if logged_in?
+            @player = Player.find_by_id(params[:id])
+            erb :'players/show_player'
+        else
+            redirect to '/login'
         end
-    
+    end
+
+    get '/players/:id/edit' do
+        if logged_in?
+            @player = Player.find_by_id(params[:id])
+            if @player && @player.team == current_user
+                erb :'players/edit_player'
+            else
+                redirect to '/players'
+            end
+        else
+            redirect to '/login'
+        end
+    end
+
+    patch '/players/:id' do
+        if logged_in?
+            if params[:name] == "" || params[:position] == ""
+                redirect to "/players/#{params[:id]}/edit"
+            else
+                @player = Player.find_by_id(params[:id])
+                if @player && @player.team == current_user
+                    if @player.update(name: params[:name], position: params[:position], games: params[:games], goals: params[:goals], saves: params[:saves], assists: params[:assists], blocks: params[:blocks], shots: params[:shots], interceptions: params[:interceptions], passes: params[:passes], red_cards: params[:red_cards], yellow_cards: params[:yellow_cards])
+                        redirect to "players/#{@player.id}"
+                    else
+                        redirect to "/players/#{player.id}/edit"
+                    end
+                else
+                    redirect to '/players'
+                end
+            end
+        else
+            redirect to '/login'
+        end
     end
 
 
-    get '/players/:id/delete' do
-        redirect_if_not_logged_in
-        @player = Player.find_by_id(params[:id])
-        if @player.team_id == current_user.id
-            @player.delete
-            redirect '/players'
+    delete '/players/:id/delete' do
+        if logged_in?
+            @player = Player.find_by_id(params[:id])
+            if @player && @player.team == current_user
+                @player.delete
+            end
+            redirect to '/players'
         else
-            redirect '/players'
+            redirect to '/login'
         end
     end
 
 end
-
 
