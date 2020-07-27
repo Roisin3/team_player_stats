@@ -16,7 +16,7 @@
             <th>Yellow Cards</th>
         </tr>
 
-        <% @player.each do |stat| %>
+        <% @players.each do |stat| %>
                 <tr>
                 <th><a href="/players/<%= stat.id %>/edit"><%= stat.name %></a></th>
                 <th><%= stat.position %></th>
