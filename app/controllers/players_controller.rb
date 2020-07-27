@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
 
     get '/players' do
         if logged_in?
-            @players = Player.all
+            @player = current_user.players
             erb :'players/players'
         else
             redirect to '/login'
