@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
   has_secure_password
-  has_many :player
+  has_many :players
+  validates :team_name, uniqueness: true
 
   def slug
       team_name.downcase.gsub('', '-')

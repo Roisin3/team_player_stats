@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
 
     get '/players' do
         if logged_in?
-            @players = Player.all
+            @players = current_user.players
             erb :'players/players'
         else
             redirect to '/login'
@@ -22,7 +22,7 @@ class PlayersController < ApplicationController
             if params[:name] == "" || params[:position] == ""
                 redirect to "/players/new"
             else
-                @player = current_user.player.build(name: params[:name], position: params[:position], games: params[:games], goals: params[:goals], saves: params[:saves], assists: params[:assists], blocks: params[:blocks], shots: params[:shots], interceptions: params[:interceptions], passes: params[:passes], red_cards: params[:red_cards], yellow_cards: params[:yellow_cards])
+                @player = current_user.players.build(name: params[:name], position: params[:position], games: params[:games], goals: params[:goals], saves: params[:saves], assists: params[:assists], blocks: params[:blocks], shots: params[:shots], interceptions: params[:interceptions], passes: params[:passes], red_cards: params[:red_cards], yellow_cards: params[:yellow_cards])
                 if @player.save
                     redirect to "/players/#{@player.id}"
                 else
